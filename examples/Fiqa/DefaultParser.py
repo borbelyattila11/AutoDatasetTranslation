@@ -59,7 +59,17 @@ class DefaultParser(DataParser):
 
 
 if __name__ == '__main__':
-    fiqa_parser = FiqaParser(r"examples/Fiqa/dummy.txt", r"examples/Fiqa")
-    fiqa_parser.read()
-    fiqa_parser.convert()
-    fiqa_parser.save
+
+    # Create an argument parser object
+    parser = argparse.ArgumentParser()
+    parser.add_argument('path_to_dataset', help = 'Path to the dataset object.') # Add 'path_to_dataset' argument
+    parser.add_argument('dataset_to_save', help = 'Path of the folder to save the translated dataset.') # Folder to save the translated dataset
+    parser.add_argument('dataset_name', help = 'Name of the dataset.')
+    args = parser.parse_args()
+
+    PARSER_NAME = args.dataset_name
+    
+    default_parser = DefaultParser(r"examples/Fiqa/dummy.txt", args.dataset_to_save)
+    default_parser.read(args.path_to_dataset)
+    default_parser.convert()
+    default_parser.save
