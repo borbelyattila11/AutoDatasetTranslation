@@ -1,10 +1,8 @@
-import sys
-sys.path.insert(0,r'./')
-import pprint
+import sys, pprint
+
 from abc import ABC, abstractmethod
 from typing import List, Dict
 from dataclasses import dataclass
-
 
 @dataclass
 class Config(ABC):
@@ -34,6 +32,5 @@ class Config(ABC):
 
     @property
     def get_dict_str(self, indent: int=4) -> None:
-        pp = pprint.PrettyPrinter(indent=indent)
+        pp = pprint.PrettyPrinter(indent = indent)
         pp.pprint(self.get_dict)
-
