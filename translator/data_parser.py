@@ -1,40 +1,20 @@
-import math
-import re
-import json
-import os
-import random
-import string
-import sys
-sys.path.insert(0, r'./')
-from copy import deepcopy
+import math, re, json, os, random, string, sys, threading, warnings, traceback
 
-import threading
-import warnings
-import traceback
-try:
-    from google.colab import files
-    IN_COLAB = True
-except ImportError:
-    IN_COLAB = False
+from concurrent.futures import ThreadPoolExecutor
 from httpcore._exceptions import ConnectTimeout
 from typing import List, Dict, Union
 from abc import abstractmethod
 from tqdm.auto import tqdm
-
-from concurrent.futures import ThreadPoolExecutor
+from copy import deepcopy
 
 from providers import Provider, GoogleProvider, MultipleProviders
 from configs import BaseConfig, QAConfig, DialogsConfig, CorpusConfig
-from .utils import force_super_call, ForceBaseCallMeta, timeit, have_internet
-from .filters import have_code, have_re_code
+from translator.utils import force_super_call, ForceBaseCallMeta, timeit
+from translator.filters import have_code, have_re_code
 
-
-if not have_internet(timeout=5):
-    raise ConnectTimeout("Please provide internet connection as this script require external api calls")
-
-
-class DataParser(metaclass=ForceBaseCallMeta):
-    def __init__(self, file_path: str,
+class DataParser(metaclass = ForceBaseCallMeta):
+    def __init__(self,
+                 file_path: str,
                  output_dir: str,
                  parser_name: str,
                  target_fields: List[str],
@@ -73,11 +53,9 @@ class DataParser(metaclass=ForceBaseCallMeta):
             self.target_lang = target_lang
             assert target_fields, f"Please specified target fields to be translate from the {self.target_config} config"
             self.target_fields = target_fields
-            assert set(self.target_fields).issubset(set(self.target_config.get_keys())), \
-                f"The target fields {self.target_fields} do not exist in the target config {self.target_config.get_keys()}"
+            assert set(self.target_fields).issubset(set(self.target_config.get_keys())), f"The target fields {self.target_fields} do not exist in the target config {self.target_config.get_keys()}"
             self.no_translated_code = no_translated_code
-            assert max_example_per_thread < large_chunks_threshold, \
-                " Large chunks threshold can't be smaller than max_example per thread!"
+            assert max_example_per_thread < large_chunks_threshold, " Large chunks threshold can't be smaller than max_example per thread!"
             self.max_example_per_thread = max_example_per_thread
             self.large_chunks_threshold = large_chunks_threshold
             if self.enable_sub_task_thread:
@@ -442,10 +420,6 @@ class DataParser(metaclass=ForceBaseCallMeta):
                     jfile.write(json.dumps(data, ensure_ascii=False) + "\n")
             print(f"\n Total line printed: {idx + 1}")
 
-        if IN_COLAB:
-            print(f"\n Downloading converted data to local machine...")
-            files.download(output_path)
-
         if self.do_translate:
             self.pre_translate_validate()
             self.translate_converted()
@@ -459,7 +433,3 @@ class DataParser(metaclass=ForceBaseCallMeta):
                         tqdm(self.converted_data_translated, desc="Writing translated data to file")):
                     jfile.write(json.dumps(data, ensure_ascii=False) + "\n")
                 print(f"\n Total line printed: {idx + 1}")
-
-            if IN_COLAB:
-                print(f"\n Downloading converted translated data to local machine...")
-                files.download(output_translated_path)
