@@ -1,8 +1,9 @@
 import sys
 
-from .config import Config
 from typing import List, Dict
 from dataclasses import dataclass, asdict, fields
+
+from configs..config import Config
 
 @dataclass
 class DefaultConfig(Config):
