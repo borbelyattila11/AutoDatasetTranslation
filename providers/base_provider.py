@@ -1,7 +1,6 @@
 from typing import Union, List
 from abc import ABC, abstractmethod
 
-
 class Provider(ABC):
     """
     Base Provider that must be inherited by all Provider class, implement your own provider by inheriting this class
@@ -49,5 +48,3 @@ class Provider(ABC):
             f" expected {type(input_data)} from self._do_translate() but got {type(translated_instance)}"
 
         return translated_instance
-
-
