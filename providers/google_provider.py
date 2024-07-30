@@ -1,9 +1,8 @@
 import sys
+
 from typing import Union, List
-sys.path.insert(0, r'/')
 from googletrans import Translator
 from .base_provider import Provider
-
 
 # https://github.com/ssut/py-googletrans
 # This is the best reliable provider, as this has access to API call instead of using the crawling method
@@ -53,9 +52,3 @@ class GoogleProvider(Provider):
         except TypeError:
             if data_type == "list": return [fail_translation_code, fail_translation_code]
             return fail_translation_code
-
-
-if __name__ == '__main__':
-    test = GoogleProvider()
-    print(test.translate(["Hello", "How are you today ?"], src="en", dest="vi"))
-    print(test.translate("Hello", src="en", dest="vi"))
