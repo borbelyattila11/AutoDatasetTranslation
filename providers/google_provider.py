@@ -2,7 +2,7 @@ import sys
 
 from typing import Union, List
 from googletrans import Translator
-from provideres.base_provider import Provider
+from providers.base_provider import Provider
 
 # https://github.com/ssut/py-googletrans
 # This is the best reliable provider, as this has access to API call instead of using the crawling method
