@@ -412,7 +412,7 @@ class DataParser(metaclass = ForceBaseCallMeta):
         Save the correct format that pyarrow supported, which is "line-delimited JSON" and can be load by
         huggingface-datasets load_datasets function
         '''
-        output_path = os.path.join(self.output_dir, f"{self.parser_name}.json")
+        output_path = os.path.join(self.output_dir, f"{self.parser_name}_source.json")
         with open(output_path, 'w', encoding='utf-8') as jfile:
             print(f"\n Saving {self.parser_name} to {output_path}... ")
             for idx, data in enumerate(tqdm(self.converted_data, desc="Writing data to file")):
@@ -425,11 +425,13 @@ class DataParser(metaclass = ForceBaseCallMeta):
             self.translate_converted()
             self.post_translate_validate()
             assert self.converted_data_translated is not None, "Converted data haven't been translated yet!"
-            output_translated_path = os.path.join(self.output_dir,
-                                                  f"{self.parser_name}_translated_{self.target_lang}.json")
-            with open(output_translated_path, 'w', encoding='utf-8') as jfile:
-                print(f"\n Saving {self.parser_name} translated to {output_translated_path}... ")
-                for idx, data in enumerate(
-                        tqdm(self.converted_data_translated, desc="Writing translated data to file")):
-                    jfile.write(json.dumps(data, ensure_ascii=False) + "\n")
-                print(f"\n Total line printed: {idx + 1}")
+
+            # Defined output path to save the translated dataset
+            output_translated_path = os.path.join(self.output_dir, f"{self.parser_name}.json")
+
+            with open(output_translated_path, 'w', encoding = 'utf-8') as file:
+                #print(f"\n Saving {self.parser_name} translated to {output_translated_path}... ")
+                #for idx, data in enumerate(tqdm(self.converted_data_translated, desc = "Writing translated data to file")):
+                    #file.write(json.dumps(data, ensure_ascii=False) + "\n")
+                #print(f"\n Total line printed: {idx + 1}")
+                json.dump(self.converted_data_translated, file, ensure_ascii = False, indent = 4)
