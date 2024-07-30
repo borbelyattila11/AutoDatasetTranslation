@@ -54,7 +54,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     # Create the dataset parser instance
-    dataset_parser = DefaultParser(r'scripts/dummy.txt', args.dataset_to_save, parser_name = args.dataset_name)
+    dataset_parser = DefaultParser(r'scripts/dummy.txt', args.dataset_to_save, file_name = args.dataset_name)
     
     # Read the dataset
     dataset_parser.read(args.path_to_dataset)
