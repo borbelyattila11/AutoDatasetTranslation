@@ -1,6 +1,6 @@
-from functools import wraps
 import abc
 
+from functools import wraps
 
 def force_super_call(method):
     # If the instance is ever used in parallel code, like in multiple threads
@@ -41,7 +41,6 @@ def force_super_call(method):
     # ordinary decorator return
     return checker_wrapper
 
-
 def forcecall__getattribute__(self, name):
     cls = type(self)
 
@@ -54,7 +53,6 @@ def forcecall__getattribute__(self, name):
             method = registry[superclass][name](method)
             break
     return method
-
 
 class ForceBaseCallMeta(abc.ABCMeta):
     forcecall_registry = {}
