@@ -444,7 +444,7 @@ class DataParser(metaclass=ForceBaseCallMeta):
 
         if IN_COLAB:
             print(f"\n Downloading converted data to local machine...")
-            files.download(output_path)
+            #files.download(output_path)
 
         if self.do_translate:
             self.pre_translate_validate()
@@ -462,4 +462,4 @@ class DataParser(metaclass=ForceBaseCallMeta):
 
             if IN_COLAB:
                 print(f"\n Downloading converted translated data to local machine...")
-                files.download(output_translated_path)
+                #files.download(output_translated_path)
