@@ -3,7 +3,7 @@ import sys
 from typing import List, Dict
 from dataclasses import dataclass, asdict, fields
 
-from configs..config import Config
+from configs.config import Config
 
 @dataclass
 class DefaultConfig(Config):
