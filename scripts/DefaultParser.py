@@ -49,14 +49,14 @@ if __name__ == '__main__':
     # Create an argument parser object
     parser = argparse.ArgumentParser()
     parser.add_argument('path_to_dataset', help = 'Path to the dataset object.') # Add 'path_to_dataset' argument
-    parser.add_argument('-o', '--output', help = 'Path of the folder to save the translated dataset.') # Folder to save the translated dataset
+    parser.add_argument('dataset_to_save', help = 'Path of the folder to save the translated dataset.') # Folder to save the translated dataset
     args = parser.parse_args()
     
     # Create the dataset parser instance
-    dataset_parser = DefaultParser(r'scripts/dummy.txt', args.path_to_dataset)
+    dataset_parser = DefaultParser(r'scripts/dummy.txt', args.dataset_to_save)
     
     # Read the dataset
-    dataset_parser.read()
+    dataset_parser.read(args.path_to_dataset)
 
     # Translate the data
     dataset_parser.convert()
