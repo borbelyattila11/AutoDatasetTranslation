@@ -21,7 +21,7 @@ class DefaultParser(DataParser):
     def read(self, path_to_dataset: str) -> None:
         super(DefaultParser, self).read()
 
-        self.data_read = load_dataset(path_to_dataset)
+        self.data_read = load_from_disk(path_to_dataset)
 
     def convert(self) -> None:
         super(DefaultParser, self).convert()
