@@ -1,1 +1,1 @@
-from .data_parser import DataParser
+from translator.data_parser import DataParser
