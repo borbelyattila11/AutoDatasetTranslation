@@ -1,6 +1,6 @@
 import re
-from typing import Tuple, Union, List
 
+from typing import Tuple, Union, List
 
 def code_likelihood_score(text: str) -> Tuple[int, list]:
     # Calculate a score based on code-like elements
@@ -30,7 +30,6 @@ def code_likelihood_score(text: str) -> Tuple[int, list]:
     score += len(found_elements) # / (len(text.split(" ")) * 0.1)
 
     return score, found_elements
-
 
 def have_code(text: Union[str, List[str]], threshold: int=8) -> Tuple[bool, int, list]:
     # threshold = len(text.split(" ")) * threshold
