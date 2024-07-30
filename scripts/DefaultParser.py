@@ -7,10 +7,10 @@ from configs import DefaultConfig
 from translator import DataParser
 
 class DefaultParser(DataParser):
-    def __init__(self, file_path: str, output_path: str):
+    def __init__(self, file_path: str, output_path: str, file_name: str = 'default_parser'):
         super().__init__(file_path,
                          output_path,
-                         parser_name = 'DefaultParser',
+                         parser_name = file_name,
                          target_config = DefaultConfig,
                          target_fields = [ 'hu_caps' ], # The data fields to be translated
                          do_translate = True,
