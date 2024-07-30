@@ -8,8 +8,8 @@ from configs.config import Config
 @dataclass
 class DefaultConfig(Config):
 
-    hu_caps: str = None
-    corpus_lengths: int = None
+    hu_caps: str
+    corpus_lengths: int
 
     def __post_init__(self) -> None:
         self.corpus_lengths = len(self.hu_caps) if self.hu_caps is not None else None
