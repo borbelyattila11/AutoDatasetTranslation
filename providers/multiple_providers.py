@@ -3,7 +3,7 @@ import translators as ts
 
 from typing import Union, List
 from translators.server import TranslatorError
-from .base_provider import Provider
+from providers.base_provider import Provider
 
 # https://github.com/UlionTse/translators
 # This library is not as reliable of a provider as googletrans, use this if you want to try out other translation services
