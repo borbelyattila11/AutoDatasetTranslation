@@ -437,29 +437,32 @@ class DataParser(metaclass=ForceBaseCallMeta):
         output_path = os.path.join(self.output_dir, f"{self.parser_name}.json")
         with open(output_path, 'w', encoding='utf-8') as jfile:
             print(f"\n Saving {self.parser_name} to {output_path}... ")
-            for idx, data in enumerate(tqdm(self.converted_data, desc="Writing data to file")):
+            for idx, data in enumerate(self.converted_data):
                 if self.validate(self.converted_data[idx].keys()):
                     jfile.write(json.dumps(data, ensure_ascii=False) + "\n")
             print(f"\n Total line printed: {idx + 1}")
 
+        '''
         if IN_COLAB:
             print(f"\n Downloading converted data to local machine...")
             #files.download(output_path)
+        '''
 
         if self.do_translate:
             self.pre_translate_validate()
             self.translate_converted()
             self.post_translate_validate()
             assert self.converted_data_translated is not None, "Converted data haven't been translated yet!"
-            output_translated_path = os.path.join(self.output_dir,
-                                                  f"{self.parser_name}_translated_{self.target_lang}.json")
+            
+            output_translated_path = os.path.join(self.output_dir, f"{self.parser_name}_translated_{self.target_lang}.json")
             with open(output_translated_path, 'w', encoding='utf-8') as jfile:
                 print(f"\n Saving {self.parser_name} translated to {output_translated_path}... ")
-                for idx, data in enumerate(
-                        tqdm(self.converted_data_translated, desc="Writing translated data to file")):
+                for idx, data in enumerate(self.converted_data_translated):
                     jfile.write(json.dumps(data, ensure_ascii=False) + "\n")
                 print(f"\n Total line printed: {idx + 1}")
 
+            '''
             if IN_COLAB:
                 print(f"\n Downloading converted translated data to local machine...")
                 #files.download(output_translated_path)
+            '''
