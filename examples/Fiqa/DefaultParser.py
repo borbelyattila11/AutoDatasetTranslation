@@ -1,7 +1,8 @@
 import sys, argparse
 sys.path.insert(0, r'./')
 
-from tqdm.auto import tqdm
+#from tqdm.auto import tqdm
+from tqdm.notebook import tqdm
 from datasets import load_dataset, load_from_disk
 from configs import CorpusConfig
 from translator import DataParser
