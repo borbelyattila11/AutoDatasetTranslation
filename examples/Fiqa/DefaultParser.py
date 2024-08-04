@@ -72,4 +72,6 @@ if __name__ == '__main__':
     default_parser = DefaultParser(r"examples/Fiqa/dummy.txt", args.dataset_to_save)
     default_parser.read(args.path_to_dataset)
     default_parser.convert()
+
+    print(f'Saving: {args.dataset_name}_translated_hu.json')
     default_parser.save
