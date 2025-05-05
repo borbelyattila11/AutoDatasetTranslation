@@ -3,7 +3,7 @@ sys.path.insert(0, r'./')
 
 from tqdm.notebook import tqdm
 from datasets import load_dataset, load_from_disk
-from configs import CorpusConfig
+from configs import PTConfig
 from translator import DataParser
 
 PARSER_NAME = "DefaultParser"
@@ -12,7 +12,7 @@ class DefaultParser(DataParser):
     def __init__(self, file_path: str, output_path: str):
         super().__init__(file_path, output_path,
                          parser_name=PARSER_NAME,
-                         target_config=CorpusConfig,    # The data config to be validated to check if self implement "convert" function is correct or not,
+                         target_config=PTConfig,    # The data config to be validated to check if self implement "convert" function is correct or not,
                                                         # you must map the data form to the correct fields of the @dataclass in the configs/corpus_config.py
                          target_fields=['hu_prompt', 'hu_text'],   # The data fields to be translated (The fields belong to CorpusConfig)
 
