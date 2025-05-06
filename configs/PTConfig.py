@@ -33,6 +33,6 @@ class PTConfig(Config):
         return asdict(self)
 
     @classmethod
-    def get_keys(self) -> List[str]:
-        all_fields = fields(self)
+    def get_keys(cls) -> List[str]:
+        all_fields = fields(cls)
         return [v.name for v in all_fields]
