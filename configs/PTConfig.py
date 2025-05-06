@@ -32,7 +32,7 @@ class PTConfig(Config):
     def get_dict(self) -> Dict:
         return asdict(self)
 
-    @classmethod
-    def get_keys(cls) -> List[str]:
-        all_fields = fields(cls)
+    @property
+    def get_keys(self) -> List[str]:
+        all_fields = fields(self)
         return [v.name for v in all_fields]
